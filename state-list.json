@@ -1,0 +1,262 @@
+[
+  {
+    "Id": 1,
+    "StateName": "Alabama",
+    "StateCode": " 1"
+  },
+  {
+    "Id": 2,
+    "StateName": "Alaska",
+    "StateCode": " 2"
+  },
+  {
+    "Id": 3,
+    "StateName": "Arizona",
+    "StateCode": " 4"
+  },
+  {
+    "Id": 4,
+    "StateName": "Arkansas",
+    "StateCode": " 5"
+  },
+  {
+    "Id": 5,
+    "StateName": "California",
+    "StateCode": " 6"
+  },
+  {
+    "Id": 6,
+    "StateName": "Colorado",
+    "StateCode": " 8"
+  },
+  {
+    "Id": 7,
+    "StateName": "Connecticut",
+    "StateCode": " 9"
+  },
+  {
+    "Id": 8,
+    "StateName": "Delaware",
+    "StateCode": " 10"
+  },
+  {
+    "Id": 9,
+    "StateName": "District of Columbia",
+    "StateCode": " 11"
+  },
+  {
+    "Id": 10,
+    "StateName": "Florida",
+    "StateCode": " 12"
+  },
+  {
+    "Id": 11,
+    "StateName": "Georgia",
+    "StateCode": " 13"
+  },
+  {
+    "Id": 12,
+    "StateName": "Hawaii",
+    "StateCode": " 15"
+  },
+  {
+    "Id": 13,
+    "StateName": "Idaho",
+    "StateCode": " 16"
+  },
+  {
+    "Id": 14,
+    "StateName": "Illinois",
+    "StateCode": " 17"
+  },
+  {
+    "Id": 15,
+    "StateName": "Indiana",
+    "StateCode": " 18"
+  },
+  {
+    "Id": 16,
+    "StateName": "Iowa",
+    "StateCode": " 19"
+  },
+  {
+    "Id": 17,
+    "StateName": "Kansas",
+    "StateCode": " 20"
+  },
+  {
+    "Id": 18,
+    "StateName": "Kentucky",
+    "StateCode": " 21"
+  },
+  {
+    "Id": 19,
+    "StateName": "Louisiana",
+    "StateCode": " 22"
+  },
+  {
+    "Id": 20,
+    "StateName": "Maine",
+    "StateCode": " 23"
+  },
+  {
+    "Id": 21,
+    "StateName": "Maryland",
+    "StateCode": " 24"
+  },
+  {
+    "Id": 22,
+    "StateName": "Massachusetts",
+    "StateCode": " 25"
+  },
+  {
+    "Id": 23,
+    "StateName": "Michigan",
+    "StateCode": " 26"
+  },
+  {
+    "Id": 24,
+    "StateName": "Minnesota",
+    "StateCode": " 27"
+  },
+  {
+    "Id": 25,
+    "StateName": "Mississippi",
+    "StateCode": " 28"
+  },
+  {
+    "Id": 26,
+    "StateName": "Missouri",
+    "StateCode": " 29"
+  },
+  {
+    "Id": 27,
+    "StateName": "Montana",
+    "StateCode": " 30"
+  },
+  {
+    "Id": 28,
+    "StateName": "Nebraska",
+    "StateCode": " 31"
+  },
+  {
+    "Id": 29,
+    "StateName": "Nevada",
+    "StateCode": " 32"
+  },
+  {
+    "Id": 30,
+    "StateName": "New Hampshire",
+    "StateCode": " 33"
+  },
+  {
+    "Id": 31,
+    "StateName": "New Jersey",
+    "StateCode": " 34"
+  },
+  {
+    "Id": 32,
+    "StateName": "New Mexico",
+    "StateCode": " 35"
+  },
+  {
+    "Id": 33,
+    "StateName": "New York",
+    "StateCode": " 36"
+  },
+  {
+    "Id": 34,
+    "StateName": "North Carolina",
+    "StateCode": " 37"
+  },
+  {
+    "Id": 35,
+    "StateName": "North Dakota",
+    "StateCode": " 38"
+  },
+  {
+    "Id": 36,
+    "StateName": "Ohio",
+    "StateCode": " 39"
+  },
+  {
+    "Id": 37,
+    "StateName": "Oklahoma",
+    "StateCode": " 40"
+  },
+  {
+    "Id": 38,
+    "StateName": "Oregon",
+    "StateCode": " 41"
+  },
+  {
+    "Id": 39,
+    "StateName": "Pennsylvania",
+    "StateCode": " 42"
+  },
+  {
+    "Id": 52,
+    "StateName": "Puerto Rico",
+    "StateCode": " 43"
+  },
+  {
+    "Id": 40,
+    "StateName": "Rhode Island",
+    "StateCode": " 44"
+  },
+  {
+    "Id": 41,
+    "StateName": "South Carolina",
+    "StateCode": " 45"
+  },
+  {
+    "Id": 42,
+    "StateName": "South Dakota",
+    "StateCode": " 46"
+  },
+  {
+    "Id": 43,
+    "StateName": "Tennessee",
+    "StateCode": " 47"
+  },
+  {
+    "Id": 44,
+    "StateName": "Texas",
+    "StateCode": " 48"
+  },
+  {
+    "Id": 45,
+    "StateName": "Utah",
+    "StateCode": " 49"
+  },
+  {
+    "Id": 46,
+    "StateName": "Vermont",
+    "StateCode": " 50"
+  },
+  {
+    "Id": 47,
+    "StateName": "Virginia",
+    "StateCode": " 51"
+  },
+  {
+    "Id": 48,
+    "StateName": "Washington",
+    "StateCode": " 53"
+  },
+  {
+    "Id": 49,
+    "StateName": "West Virginia",
+    "StateCode": " 54"
+  },
+  {
+    "Id": 50,
+    "StateName": "Wisconsin",
+    "StateCode": " 55"
+  },
+  {
+    "Id": 51,
+    "StateName": "Wyoming",
+    "StateCode": " 56"
+  }
+]
