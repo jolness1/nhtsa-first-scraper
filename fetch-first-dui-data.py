@@ -1,13 +1,3 @@
-#!/usr/bin/env python3
-"""Fetch FIRST CrashReport.xlsx for all states using Playwright to obtain cookies.
-
-Usage:
-  - create and activate a venv: `python3 -m venv .venv && source .venv/bin/activate`
-  - install deps: `pip install -r requirements.txt`
-  - install playwright browsers: `playwright install` (after installing package)
-  - run: `python fetch-first-dui-data.py`
-"""
-
 import json
 import os
 import time
@@ -119,21 +109,57 @@ def post_query_and_download(request_api, page, sid, name):
 		data_url = "data:text/html," + quote(page_html)
 		page.goto(data_url, timeout=60000)
 
-	# wait for the xlsx anchor to appear in the page DOM (no repeated POSTS)
+	# wait for any download anchors to appear in the page DOM (no repeated POSTS)
 	try:
-		handle = page.wait_for_selector('a[download$=".xlsx"], a[href$=".xlsx"], a[href*="/files/files/"]', timeout=180000)
-		link = handle.get_attribute("href")
+		page.wait_for_selector('a[download], a[href*="/files/files/"]', timeout=180000)
 	except Exception:
-		# try a JS fallback to find the anchor
+		pass
+
+	# collect candidate anchors and prefer the .xlsx one when multiple are present
+	anchors = page.evaluate(
+		"""
+		() => {
+		  const nodes = Array.from(document.querySelectorAll('a[download], a[href*="/files/files/"]'));
+		  return nodes.map(a => ({ href: a.getAttribute('href'), download: a.getAttribute('download') }));
+		}
+		"""
+	)
+
+	link = None
+	if anchors:
+		# prefer explicit download attribute ending with .xlsx
+		for a in anchors:
+			h = a.get('href') if isinstance(a, dict) else a[0]
+			d = a.get('download') if isinstance(a, dict) else (a[1] if len(a) > 1 else '')
+			if d and d.lower().endswith('.xlsx'):
+				link = h
+				break
+		# next prefer href ending with .xlsx
+		if not link:
+			for a in anchors:
+				h = a.get('href')
+				if h and h.lower().endswith('.xlsx'):
+					link = h
+					break
+		# fallback: choose first anchor that looks like a file/content link
+		if not link:
+			for a in anchors:
+				h = a.get('href')
+				d = a.get('download') or ''
+				if h and ('/files/files/' in h or '/content' in h or d.lower().endswith('.pdf') or d.lower().endswith('.docx')):
+					link = h
+					break
+
+	# final fallback: try to find a direct xlsx anchor via JS query
+	if not link:
 		try:
-			link = page.evaluate("() => { const a = document.querySelector('a[download$=\".xlsx\"], a[href$=\".xlsx\"], a[href*=\"/files/files/\"]'); return a ? a.getAttribute('href') : null }")
+			link = page.evaluate("() => { const a = document.querySelector('a[download$=\".xlsx\"], a[href$=\".xlsx\"]'); return a ? a.getAttribute('href') : null }")
 		except Exception:
 			link = None
 
 	if not link:
 		print(f"Could not find xlsx link for {name} via DOM polling")
 		return False
-
 
 	# normalize link and download
 	if link.startswith("/"):
@@ -145,11 +171,28 @@ def post_query_and_download(request_api, page, sid, name):
 
 	r2 = request_api.get(url, headers={"referer": QUERY_URL, "origin": "https://cdan.dot.gov"}, timeout=120000)
 	if r2.status == 200:
-		outpath = OUTDIR / f"{name}-dui-data.xlsx"
 		bodybytes = r2.body()
+		ctype = r2.headers.get("content-type", "")
+		print(f"DEBUG: download content-type={ctype} length={len(bodybytes)} for {name}")
+		# detect file magic to determine correct extension
+		ext = ".bin"
+		if bodybytes.startswith(b"PK\x03\x04"):
+			ext = ".xlsx"
+		elif bodybytes.startswith(b"%PDF"):
+			ext = ".pdf"
+		else:
+			low = bodybytes.lstrip()[:64].lower()
+			if low.startswith(b"<!doctype") or low.startswith(b"<html") or b"<html" in low:
+				ext = ".html"
+
+		outpath = OUTDIR / f"{name}-dui-data{ext}"
 		with open(outpath, "wb") as fh:
 			fh.write(bodybytes)
 		print(f"Saved {outpath}")
+		# If result is not an xlsx, treat it as a failure for XLSX retrieval
+		if ext != ".xlsx":
+			print(f"WARNING: downloaded file for {name} is {ext} (expected .xlsx). See {outpath}")
+			return False
 		return True
 	else:
 		print(f"Failed to download file for {name}: {r2.status}")
@@ -160,7 +203,7 @@ def main():
 	ensure_outdir()
 	states = load_states()
 	with sync_playwright() as p:
-		# Allow showing the browser for debugging by setting env var SHOW_BROWSER=1 or "true"
+		# allow showing the browser for debugging by setting env var SHOW_BROWSER=1 or "true"
 		show = os.getenv("SHOW_BROWSER", "").lower()
 		headless = not (show in ("1", "true", "yes"))
 		browser = p.chromium.launch(headless=headless)
@@ -170,7 +213,7 @@ def main():
 		request_api = context.request
 		failed = []
 		for s in states:
-			# prefer using StateCode from the JSON (strip whitespace)
+			# use StateCode from the JSON (strip whitespace)
 			state_code = (s.get("StateCode") or "").strip()
 			if not state_code:
 				# fallback to Id if StateCode missing
