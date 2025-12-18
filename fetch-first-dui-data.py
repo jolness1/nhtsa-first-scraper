@@ -9,6 +9,7 @@ Usage:
 """
 
 import json
+import os
 import time
 from pathlib import Path
 from urllib.parse import urlencode
@@ -159,21 +160,40 @@ def main():
 	ensure_outdir()
 	states = load_states()
 	with sync_playwright() as p:
-		browser = p.chromium.launch(headless=True)
+		# Allow showing the browser for debugging by setting env var SHOW_BROWSER=1 or "true"
+		show = os.getenv("SHOW_BROWSER", "").lower()
+		headless = not (show in ("1", "true", "yes"))
+		browser = p.chromium.launch(headless=headless)
 		context = browser.new_context()
 		page = context.new_page()
 		page.goto(QUERY_URL, timeout=60000)
 		request_api = context.request
+		failed = []
 		for s in states:
-			sid = s.get("Id")
+			# prefer using StateCode from the JSON (strip whitespace)
+			state_code = (s.get("StateCode") or "").strip()
+			if not state_code:
+				# fallback to Id if StateCode missing
+				state_code = str(s.get("Id", ""))
 			name = s.get("StateName", "unknown").replace("/", "-")
-			print(f"Processing {sid} - {name}")
+			print(f"Processing state={state_code} name={name}")
 			try:
-				ok = post_query_and_download(request_api, page, sid, name)
+				ok = post_query_and_download(request_api, page, state_code, name)
 			except Exception as e:
 				print(f"Error for {name}: {e}")
+				ok = False
+			if not ok:
+				failed.append(name)
 			time.sleep(1)
 		browser.close()
+
+	# write failed list
+	if failed:
+		failfile = WORKDIR / "failed-state-downloads.txt"
+		with open(failfile, "w", encoding="utf-8") as fh:
+			for nm in failed:
+				fh.write(nm + "\n")
+		print(f"Wrote {len(failed)} failed states to {failfile}")
 
 
 if __name__ == "__main__":
