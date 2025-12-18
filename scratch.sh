@@ -1,0 +1,22 @@
+curl 'https://cdan.dot.gov/SASJobExecution/?sso_guest=true' \
+  --data-raw $'------WebKitFormBoundaryimrpnlpkKLAB2Buo\r\nContent-Disposition: form-data; name="SASQueryString"\r\n\r\n&topic_num=26&metric_num=33&metrictype_num=37&CrashYear=2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,&State= 1&A_PTYPE=1&DRIMPAIR_A=9&TableRows=YEAR&TableCols=MONTH&ReleaseDate=Version 9.2.1, released Nov 13, 2025&ReportType=1&Criteria=Years: 2010-2023\r\n------WebKitFormBoundaryimrpnlpkKLAB2Buo\r\nContent-Disposition: form-data; name="_program"\r\n\r\n/Public/OTRA/Apps/FIRST/FIRST\r\n------WebKitFormBoundaryimrpnlpkKLAB2Buo\r\nContent-Disposition: form-data; name="_apphostname"\r\n\r\ncdan.dot.gov\r\n------WebKitFormBoundaryimrpnlpkKLAB2Buo--\r\n'
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundaryimrpnlpkKLAB2Buo' \
+  -b $'sas-ingress-nginx=b4e27a856e295caa42949762562d9ef8|4149f60c1217d8889a1d2f7717687849; 2587918f-e172-43aa-b48e-4eb395025a61=MTc2NjAwNDQ4NHxEWDhFQVFMX2dBQUJEQUVNQUFBcF80QUFBUU4xY21rZ0wxTkJVMHB2WWtWNFpXTjFkR2x2Ymk4X2MzTnZYMmQxWlhOMFBYUnlkV1U9fDywSlxINNM21FdNff9yrvo04ua2Rhfj5AJkqB82jHHK; JSESSIONID=0900149a-d4b5-43f7-a750-febba9976469; 0900149a-d4b5-43f7-a750-febba9976469=MTc2NjAwNTgwMXxOd3dBTkZkR1JsZ3pVazVGTTBOTldWbEdRVlZCUkZKVlZVMUJWVFZQTWtSTFVsaFNURlZHVGsxRldsbFRSVUpITTBNMldqSlFUVUU9fPgRXvxA5RWTk985GnPfnw-DfzDKTFJHhJHHO0Wq-9V_; ASP.NET_SessionId=lpgu3tqqqmueg2ib3mkalfol; __RequestVerificationToken_L3F1ZXJ50=zd8VvCtwbj0gJWU921OZ-2Ix73t_CsHLFYFztjY72Cxypedj6X6Po-_p5XiDESrVmzokLhkFqZDQi9wbVsqgu583BfWIzf1G3T93qfOOROY1; ak_bmsc=F3BE1484D6862BCE2384B5E51072F041~000000000000000000000000000000~YAAQhk3bF9sA5CSbAQAAIPIQLh5tduo+j7+49kGIcJ3Gaomk32/V1GS1l4dvqJiKJMMq8EI6dsEQr+lP6mRWvVb6kjfU7yMAn0p8NUFwVBxEA1JDu5sM8/ZOHzB6seqs09lPANQHjztey0dctfZp3rZfkSijZflqTUDO6PkJnJ4QTsali9ZdH5CNFkiuvjKUOsmCCo69qA9Q7/DtA9UzPuLnb2VOYhSQs8kGF/Ukw50SHZI5ymQQXk1bqCNFDKSq0V4BZd53Z1afzpJ2OiN59p1HIXQhoVQUNY9i3Dc/hqFDKVK1zVQ4duwl9khvb/ENazSXX34aoV9nZj7IA/nM1HK5X4I4AGN/XGtIYeG2hrCH1KafHddv/qNz231MSlPVD0MBfg/IIiH9; NHTSA=\u0021BTww26VTubm+ro/I3sRetaVg0a8n9LokSd6wuzF8CLE52AsI/LeicLdRIxAEaG7n+zMb1013OL9Fm+4=; bm_sv=A178028D6880E07C6E49DA811D39FCFC~YAAQhk3bF9PF5SSbAQAAzYcmLh6Fjo0H9C7FjjOLcbvTb/+UAoOURb7+JGB2dIK5JFazWsMhnxiz4qow4YYItl5/7fDuiSqusMKRq6K050c6pYOClecF6S8f8aOL+re6n7CEGeO+5jfq/XofyQH29Q5XThpQ9Gcfb8WAmMQNoVDCSjEIi3BgVPvM6Y1UpFJS24AxhqSdiN5MGH/AR/DLLSWdB7dnW1wHPKDNdvqdh4qHBx4s+89Sg3CF/gJUmWA=~1' \
+  -H 'dnt: 1' \
+  -H 'origin: https://cdan.dot.gov' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://cdan.dot.gov/query' \
+  -H 'sec-ch-ua: "Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-gpc: 1' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36' \
+  -H 'x-my-custom-header: valueNULL' \
+  -H 'x-requested-with: XMLHttpRequest' \
